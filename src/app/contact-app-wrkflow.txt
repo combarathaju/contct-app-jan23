@@ -1,0 +1,25 @@
+                     Contact management app - wrk-flow
+                     ---------------------------------
+1. create ang project
+2. clean the code
+3. run project
+4. link all external library: bottstrp,font-awsome,google-fonts
+5. create components:
+      -header
+      -Footer
+      -all-Contact
+      -add-Contact
+      -view-Contact
+      -edit-contacts
+      -page-not-found
+6. delete all the spec.ts files from each userdefined components
+7. set up path for each components    
+      -all-Contact  : path: http://localhost:4200/
+      -add-Contact  : path: http://localhost:4200/add-contacts
+      -view-Contact : path: http://localhost:4200/view-contacts/id
+      -edit-Contact : path: http://localhost:4200/edit-contacts/id
+8. to navigate according to component use router outlet selector in AppComponent.html
+9. Design components
+10. Create services ti share common logic (api call) between components:ng g s services-folder/services
+11. Dependency Inject 'HttpClient' class in service class
+    - Using R

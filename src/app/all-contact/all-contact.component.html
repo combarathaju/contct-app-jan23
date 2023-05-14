@@ -1,0 +1,111 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <!-- page title -->
+      <h1>
+        All Contacts
+        <a class="btn btn-success ms-5" routerLink="add-contact"
+          ><i class="fa-solid fa-user-plus"></i>Add New</a
+        >
+      </h1>
+      <!-- content -->
+      <p style="text-align: justify">
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dicta
+        assumenda nemo temporibus consectetur quos eius hic consequuntur quas
+        eligendi fuga beatae dolor culpa dolore quasi totam aperiam dolorum,
+        praesentium vero!Lorem Lorem ipsum dolor sit amet consectetur
+        adipisicing elit. Quos eum consequuntur tenetur, nobis consectetur
+        libero minus obcaecati aspernatur vitae animi quam explicabo quisquam
+        corporis, sit debitis? Maxime doloribus quae quasi. Lorem ipsum dolor
+        sit amet consectetur adipisicing elit. Tenetur modi ullam cum voluptate
+        sint, eveniet quia earum, possimus nobis facere reiciendis dolore
+        molestiae expedita labore impedit inventore voluptatum alias? Modi!
+      </p>
+  
+      <!-- search option -->
+      <div class="row mt-5">
+        <div class="col-lg-2 fw-bolder">Search Contact:</div>
+        <div class="col-6">
+          <!-- input search box  -->
+          <input [(ngModel)]="searchKey"
+            placeholder="Type Contact Name Here!!!!"
+            type="text"
+            class="form-control me-auto"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+ <div *ngIf="isLoading && allContacts.length==0" class="text-center mt-5">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+ </div>
+<!-- if no contact match to the input -->
+<div *ngIf="(allContacts | filter : searchKey : 'name').length==0 && !isLoading">
+<h3 style="text-align: center;margin-top: 20px;">No Contacts Found</h3>
+</div>
+
+<div *ngIf="errorMsg" class="alert alert-danger m-5" role="alert">
+{{errorMsg}}
+</div>
+
+<div class="container mt-5">
+  <div  *ngIf="!isLoading && allContacts.length>0" class="row">
+    <div class="col-lg-6 mb-3" *ngFor="let contact of allContacts | filter : searchKey : 'name' ">
+      <div class="card">
+        <div class="card-body">
+          <div class="row align-items-center">
+            <div class="col-sm-3 text-center">
+              <!-- image -->
+              <img
+                 class="w-100 " height="135vh"
+              [src]="contact.photo"
+                alt=""
+              />
+            </div>
+            <div class="col-md-7">
+              <!-- content -->
+              <ul class="list-group">
+                <li class="list-group-item">
+                  Name: <span class="fw-bold">{{contact.name}}</span>
+                </li>
+                <li class="list-group-item">
+                  Mobile: <span class="fw-bold">{{contact.mobile}}</span>
+                </li>
+                <li class="list-group-item">
+                  Email: <span class="fw-bold">{{contact.email}}</span>
+                </li>
+              </ul>
+            </div>
+            <div
+              class="col-md-1 d-flex flex-column justify-content-center align-items-center"
+            >
+              <!-- actions -->
+              <!-- views -->
+              <a
+                class="btn btn-warning text-light mb-1"
+                routerLink="view-contact/{{contact.id}}"
+              >
+                <i class="fa-solid fa-eye"></i>
+              </a>
+              <!-- edit -->
+              <a
+                class="btn btn-success text-light mb-1"
+                routerLink="edit-contact/{{contact.id}}"
+              >
+                <i class="fa-solid fa-pen"></i>
+              </a>
+              <!-- delete -->
+              <button (click)="deleteContact(contact.id)" class="btn btn-danger text-light">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
